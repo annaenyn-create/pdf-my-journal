@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ОТКРОВЕННО С СОБОЙ — PDF Версия</title>
+    <title>ОТКРОВЕННО С СОБОЙ — PDF</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap');
 
@@ -27,7 +27,7 @@
         }
 
         /* Общие настройки для страниц А4 */
-        .page, .cover-page, .main-cover {
+        .page, .cover-page, .main-cover, .author-page, .toc-page {
             width: 210mm;
             height: 297mm;
             margin: 20mm auto;
@@ -306,20 +306,30 @@
             color: rgba(198, 168, 124, 0.4);
         }
 
-        /* Настройки для идеальной печати в PDF */
+        /* Бронебойные настройки для печати */
         @media print {
             @page {
                 size: A4 portrait;
-                margin: 0; 
+                margin: 0 !important; 
             }
             body { 
-                background-color: white; 
+                background-color: white;
+                margin: 0 !important;
+                padding: 0 !important;
+                -webkit-print-color-adjust: exact !important; 
+                print-color-adjust: exact !important;
             }
-            .page, .cover-page, .main-cover, .toc-page, .author-page { 
-                margin: 0; 
-                box-shadow: none; 
-                -webkit-print-color-adjust: exact; 
-                print-color-adjust: exact;
+            .page, .cover-page, .main-cover, .author-page, .toc-page { 
+                width: 210mm !important;
+                height: 297mm !important;
+                margin: 0 !important; 
+                box-shadow: none !important; 
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+            }
+            /* Центрируем содержимое обложек при печати */
+            .main-cover, .cover-page {
+                padding-top: 40mm !important;
             }
         }
     </style>
